@@ -23,7 +23,7 @@
 - npm i pg
 - npm i typescript
 - npm i -g db-migrate
-- npm install -g db-migrate-pg
+- npm i -g db-migrate-pg
 - npm i --save cors
 - npm i --save-dev @types/bcrypt
 - npm i --save-dev @types/express
