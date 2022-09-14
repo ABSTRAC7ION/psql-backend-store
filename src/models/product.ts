@@ -76,4 +76,18 @@ export class productStore {
       throw new Error(`Could not delete product ${id}. Error: ${err}`);
     }
   }
+
+  async deleteAll(): Promise<Product> {
+    try {
+      //@ts-ignore
+      const conn = await client.connect();
+      const sql = "DELETE FROM product RETURNING *";
+      const result = await conn.query(sql);
+      conn.release();
+
+      return result.rows[0];
+    } catch (err) {
+      throw new Error(`Products can not be deleted . Error: ${err}`);
+    }
+  }
 }

@@ -1,6 +1,6 @@
+import bcrypt from "bcrypt";
 // @ts-ignore
 import client from "../database";
-import bcrypt from "bcrypt";
 
 export type User = {
   firstname: string;
@@ -71,6 +71,7 @@ export class UserStore {
     lastname: string,
     password: string
   ): Promise<User | null> {
+    // @ts-ignore
     const conn = await client.connect();
     const sql =
       "SELECT password FROM users WHERE firstname=($1) AND lastname=($2)";
@@ -90,5 +91,19 @@ export class UserStore {
     }
 
     return null;
+  }
+
+  async deleteAll(): Promise<User> {
+    try {
+      //@ts-ignore
+      const conn = await client.connect();
+      const sql = "DELETE FROM users RETURNING *";
+      const result = await conn.query(sql);
+      conn.release();
+
+      return result.rows;
+    } catch (err) {
+      throw new Error(`Users can not be deleted . Error: ${err}`);
+    }
   }
 }

@@ -22,3 +22,5 @@ orderRoutes(app);
 app.listen(address, function () {
   console.log(`starting app on localhost:${address}`);
 });
+
+export default app;
