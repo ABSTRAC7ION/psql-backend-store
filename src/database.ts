@@ -33,8 +33,6 @@ if (ENV === "dev") {
   });
 }
 
-console.log(ENV);
-
-client?.connect();
+console.log(ENV, POSTGRES_DB_TEST, POSTGRES_DB);
 
 export default client;

@@ -1,4 +1,5 @@
-import { Product, productStore } from "../product";
+import { productStore } from "../product";
+require("dotenv").config();
 
 const store = new productStore();
 
@@ -25,31 +26,16 @@ describe("Product Model", () => {
       price: 500,
       category: "mobiles",
     });
-    expect(result).toEqual({
-      name: "iphone",
-      price: 500,
-      category: "mobiles",
-    });
-  });
-
-  it("index method should return a list of products", async () => {
-    const result = await store.index();
-    expect(result).toEqual([
-      {
-        name: "iphone",
-        price: 500,
-        category: "mobiles",
-      },
-    ]);
+    expect(result.name).toEqual("iphone");
+    expect(result.price).toEqual(500);
+    expect(result.category).toEqual("mobiles");
   });
 
   it("show method should return the correct product", async () => {
     const result = await store.show("1");
-    expect(result).toEqual({
-      name: "iphone",
-      price: 500,
-      category: "mobiles",
-    });
+    expect(result.name).toEqual("ipone");
+    expect(result.price).toEqual(500);
+    expect(result.category).toEqual("mobiles");
   });
 
   it("delete method should remove the product", async () => {

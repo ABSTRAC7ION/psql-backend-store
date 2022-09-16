@@ -1,6 +1,5 @@
-import { Order, orderStore } from "../order";
-import { Product, productStore } from "../product";
-import { User, UserStore } from "../user";
+import { orderStore } from "../order";
+require("dotenv").config();
 
 const store = new orderStore();
 

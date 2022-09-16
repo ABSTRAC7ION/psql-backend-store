@@ -1,4 +1,5 @@
 import { User, UserStore } from "../user";
+require("dotenv").config();
 
 const store = new UserStore();
 
@@ -21,30 +22,15 @@ describe("User Model", () => {
       lastname: "shady",
       password: "password",
     });
-    expect(result).toEqual({
-      firstname: "ibrahim",
-      lastname: "shady",
-      password: "password",
-    });
+    expect(result.firstname).toEqual("ibrahim");
+    expect(result.lastname).toEqual("shady");
+    expect(result.password).not.toEqual("password");
   });
 
-  it("index method should return a list of products", async () => {
-    const result = await store.index();
-    expect(result).toEqual([
-      {
-        firstname: "ibrahim",
-        lastname: "shady",
-        password: "password",
-      },
-    ]);
-  });
-
-  it("show method should return the correct product", async () => {
+  it("show method should return the correct users", async () => {
     const result = await store.show("1");
-    expect(result).toEqual({
-      firstname: "ibrahim",
-      lastname: "shady",
-      password: "password",
-    });
+    expect(result.firstname).toEqual("ibrahim");
+    expect(result.lastname).toEqual("shady");
+    expect(result.password).not.toEqual("password");
   });
 });

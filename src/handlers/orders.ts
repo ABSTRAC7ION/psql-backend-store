@@ -25,6 +25,15 @@ const show = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
+  try {
+    const token = req.body.token;
+    jwt.verify(token, process.env.TOKEN_SECRET);
+  } catch (err) {
+    res.status(401);
+    res.json("Access denied, invalid token");
+    return;
+  }
+
   //1-getting id from token
   const token = req.body.token;
   const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
@@ -42,6 +51,15 @@ const create = async (req: Request, res: Response) => {
 };
 
 const addProduct = async (_req: Request, res: Response) => {
+  try {
+    const token = _req.body.token;
+    jwt.verify(token, process.env.TOKEN_SECRET);
+  } catch (err) {
+    res.status(401);
+    res.json("Access denied, invalid token");
+    return;
+  }
+
   const orderId: string = _req.params.id;
   const productId: string = _req.body.productId;
   const quantity: number = parseInt(_req.body.quantity);
