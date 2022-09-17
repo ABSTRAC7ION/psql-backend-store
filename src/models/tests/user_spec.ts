@@ -26,11 +26,4 @@ describe("User Model", () => {
     expect(result.lastname).toEqual("shady");
     expect(result.password).not.toEqual("password");
   });
-
-  it("show method should return the correct users", async () => {
-    const result = await store.show("1");
-    expect(result.firstname).toEqual("ibrahim");
-    expect(result.lastname).toEqual("shady");
-    expect(result.password).not.toEqual("password");
-  });
 });

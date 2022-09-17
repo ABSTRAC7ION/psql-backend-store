@@ -70,8 +70,8 @@
 - start the app: npm start
 - watch for db connection: npm run watch
 - run tests: npm run test
-- migrate db up: npm run db-up
-- migrate db down: npm run db-down
+- migrate db up: npm run db:up
+- migrate db down: npm run db:down
 
 ## END-POINTS
 

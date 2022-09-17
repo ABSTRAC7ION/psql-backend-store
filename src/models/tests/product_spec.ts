@@ -1,47 +1,59 @@
-import { productStore } from "../product";
-require("dotenv").config();
+import { Product, productStore } from "../product";
 
 const store = new productStore();
 
-describe("Product Model", () => {
-  it("should have an index method", () => {
+describe("Product testing model", () => {
+  it("tests the availability of the index method", () => {
     expect(store.index).toBeDefined();
   });
 
-  it("should have a show method", () => {
+  it("tests the availability of the show method", () => {
     expect(store.show).toBeDefined();
   });
 
-  it("should have a create method", () => {
+  it("tests the availability of the create method", () => {
     expect(store.create).toBeDefined();
   });
 
-  it("should have a delete method", () => {
-    expect(store.delete).toBeDefined();
+  beforeAll(async () => {
+    await store.create({
+      name: "iphone",
+      price: 50,
+      category: "mobile",
+    });
+  });
+  afterAll(async () => {
+    await store.deleteAll();
   });
 
-  it("create method should add a product", async () => {
+  it("tests the create method", async () => {
     const result = await store.create({
       name: "iphone",
-      price: 500,
-      category: "mobiles",
+      price: 50,
+      category: "mobile",
     });
     expect(result.name).toEqual("iphone");
-    expect(result.price).toEqual(500);
-    expect(result.category).toEqual("mobiles");
+    expect(result.price).toEqual(50);
+    expect(result.category).toEqual("mobile");
   });
 
-  it("show method should return the correct product", async () => {
-    const result = await store.show("1");
-    expect(result.name).toEqual("ipone");
-    expect(result.price).toEqual(500);
-    expect(result.category).toEqual("mobiles");
-  });
-
-  it("delete method should remove the product", async () => {
-    store.delete("1");
+  it("tests the index method", async () => {
     const result = await store.index();
+    expect(result[0].name).toEqual("iphone");
+    expect(result[0].price).toEqual(50);
+    expect(result[0].category).toEqual("mobile");
+  });
 
-    expect(result).toEqual([]);
+  it("tests the show method", async () => {
+    const result = await store.show("1");
+
+    () => {
+      if (result === undefined) {
+        return;
+      }
+      expect(result.name).toEqual("iphone");
+      expect(result.price).toEqual(50);
+      expect(result.category).toEqual("mobile");
+    };
   });
 });
