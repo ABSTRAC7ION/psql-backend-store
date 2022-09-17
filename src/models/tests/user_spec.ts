@@ -26,4 +26,27 @@ describe("User Model", () => {
     expect(result.lastname).toEqual("shady");
     expect(result.password).not.toEqual("password");
   });
+
+  it("tests the show method", async () => {
+    const result = await store.show("1");
+    () => {
+      if (result === undefined) {
+        return;
+      }
+      expect(result.firstname).toEqual("ibrahim");
+      expect(result.lastname).toEqual("shady");
+      expect(result.password).not.toEqual("password");
+    };
+  });
+
+  it("tests the authenticate method", async () => {
+    const result: User | null = await store.authenticate(
+      "ibrahim",
+      "shady",
+      "password"
+    );
+    expect((result as User).firstname).toBeUndefined;
+    expect((result as User).lastname).toBeUndefined;
+    expect((result as User).password).not.toEqual("password");
+  });
 });
